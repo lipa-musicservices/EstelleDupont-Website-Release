@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Estelle Dupont | Saxophon</title>
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="Style.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;600;800&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ANKER FÜR "NACH OBEN" -->
+  <div id="top"></div>
+
+  <!-- ===== HEADBAR (alt / MenuBar) ===== -->
+  <div class="MenuBar" id="menuBar">
+    <!-- Logo-Link: scrollt nach oben statt reload -->
+    <!-- Logo-Link -->
+<a class="MenuBarLink MenuBrand" href="#top" aria-label="Zur Startseite">
+  <span class="MenuBarLogoLink" aria-hidden="true">
+    <img class="MenuBarLogo" src="Resources/NegLogoNoBG.png" alt="">
+  </span>
+
+  <span class="MenuBrandText">
+    <span class="MenuBrandName">Estelle Dupont</span>
+    <span class="MenuBrandSub">Saxophon</span>
+  </span>
+</a>
+
+
+<button class="MenuToggle" aria-label="Menü öffnen" aria-expanded="false" type="button">
+  <span></span><span></span><span></span>
+</button>
+
+
+<!-- Links-Container -->
+<nav class="MenuLinks" aria-label="Hauptmenü">
+      <a class="MenuBarItem" href="index.html#top">Home</a>
+      <a class="MenuBarItem" href="index.html#about">About</a>
+      <a class="MenuBarItem" href="index.html#media">Media</a>
+      <a class="MenuBarItem" href="index.html#bands">Bands</a>
+      <a class="MenuBarItem" href="index.html#contact">Kontakt</a>
+</nav>
+
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Titelbereich">
+    <img src="Resources/MainPic.jpg" class="HeroImage" alt="Estelle Dupont">
+
+    <div class="heroOverlay"></div>
+
+    <div class="heroContent">
+      <p class="heroKicker">Saxophonistin</p>
+      <h1 class="heroTitle">Estelle Dupont</h1>
+      <p class="heroLead">
+        I bims 1 Estelle und hab nen klasse Saund
+      </p>
+
+      <div class="heroActions">
+        <a class="btn btnPrimary" href="#contact"><i class="fa-solid fa-envelope"></i> Booking</a>
+        <a class="btn btnGhost" href="#media"><i class="fa-brands fa-youtube"></i> Media</a>
+        <a class="btn btnGhost" href="#bands"><i class="fa-solid fa-users"></i> Bands</a>
+      </div>
+
+      <div class="heroSocial">
+        <a class="iconBtn iconBtn--light" href="#" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="iconBtn iconBtn--light" href="#" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a class="iconBtn iconBtn--light" href="#" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CONTENT ===== -->
+  <main class="page">
+
+    <!-- LIVE -->
+    <section class="section" id="live">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">Live</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <div class="list" id="liveList">
+          <div class="itemText" id="liveStatus">Loading upcoming shows…</div>
+        </div>
+
+        <button id="liveToggleBtn" class="liveToggleBtn" type="button" hidden>
+          Weitere Termine anzeigen
+        </button>
+
+      </div>
+    </section>
+
+    <!-- INSTAGRAM FEED (Mirror) -->
+    <section class="section" id="news">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">Instagram</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <!-- Mirror iframe bridge (einmal pro Seite) -->
+        <script src="https://cdn.jsdelivr.net/npm/@mirrorapp/iframe-bridge@latest/dist/index.umd.js"></script>
+
+        <div class="igEmbed">
+          <iframe
+            class="igFrame"
+            onload="typeof iFrameSetup === 'function' ? iFrameSetup(this) : null"
+            src="https://app.mirror-app.com/feed-instagram/371f2023-7143-48df-a8a3-44187507bcc0/preview"
+            style="width:100%;border:none;overflow:hidden;"
+            scrolling="no"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">About</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <div class="aboutGrid">
+          <div class="aboutText">
+            <p>
+              Estelle Dupont (*2005) ist eine aufstrebende Tenorsaxophonistin in der deutschen Jazzszene. Sie begann ihre
+              Karriere in Baden-Württemberg, wo sie mit 14 Jahren im Rahmen der Jazz Juniors BW gefördert wurde und mit 16
+              Jahren zum Landes Jugend Jazz Orchester aufstieg. Bis 2025 war sie Teil des Orchesters, mit dem unter anderem
+              zwei CDs aufgenommen und eine Tour nach Indien unternommen wurde. 2022-2023 war Dupont Jungstudentin an der
+              Hochschule für Musik Mannheim bei Prof. Stefan Karl Schmid. Seit 2024 studiert sie Jazz Saxophon im Bachelor an
+              der Hochschule für Musik Nürnberg in der Saxophonklasse Prof. Klaus Graf. 2025 bestand sie das Vorspiel für die
+              aktuelle Besetzung des Bundes Jazz Orchesters, mit dem Dupont seitdem deutschlandweit unterwegs ist.
+              Ihr Fokus liegt auf Bigbandmusik, sodass Dupont sich schon in ihren jungen Jahren neben dem Bujazzo in weiteren
+              professionellen Bigbands, wie dem Groove Legend Orchestra, der Thilo Wolf Bigband oder dem Sunday Night Orchestra,
+              präsentieren durfte. Die Saxophonistin ist auch in verschiedenen kleineren Besetzungen zu finden, wie
+              Beispielsweise dem Saxophonquintett “Pentaphone Project”, den Funk Bands “Jazzify” und “FUNKgeraet”, dem Jazzquartett
+              “Kalle Quartett”, sowie verschiedenen Projektbands, mit denen sie schon in etablierten Jazzclubs wie dem Bix in
+              Stuttgart, dem Ella und Louis in Mannheim, dem Jazzpoint Wangen, der Hemingwaylounge Karlsruhe, dem Jazzstudio
+              Nürnberg und vielen weiteren, aufgetreten ist.
+            </p>
+
+            <div class="tags">
+              <span class="tagPlain">Modern Jazz</span>
+              <span class="tagPlain">Funk / Groove</span>
+              <span class="tagPlain">Bigband</span>
+            </div>
+          </div>
+
+          <div class="aboutImageWrap">
+            <img class="aboutImage" src="Resources/About.jpeg" alt="Estelle Dupont – Portrait">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEDIA -->
+    <section class="section" id="media">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">Media</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <div class="mediaGrid">
+          <iframe class="embed" src="https://www.youtube.com/embed/XSiATXl4Vyo?si=6KnccJyreWQw1zLU&amp;controls=0"
+                  title="Video 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+
+          <iframe class="embed" src="https://www.youtube.com/embed/MpK9Z9of1mI?si=DA_o_GNet0nUvSLQ&amp;controls=0"
+                  title="Video 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+
+          <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/7j5WUgOR4pHb68GUzFB7iI?utm_source=generator" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANDS -->
+    <section class="section" id="bands">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">Bands</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <div class="bands">
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie1.PNG" alt="BUJAZZO">
+            <div class="bandBody">
+              <h3 class="bandName">BUJAZZO</h3>
+              <p class="bandText">
+                Bundesjazzorchester – junges Spitzenensemble des deutschen Jazz. Moderne Bigband-Literatur,
+                präzises Zusammenspiel und starke Solist:innen.
+              </p>
+              <div class="bandLinks">
+                <a class="iconBtn" href="https://www.bundesjazzorchester.de/" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+                <a class="iconBtn" href="https://www.instagram.com/bundesjazzorchester/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a class="iconBtn" href="https://www.youtube.com/@deutschermusikrat" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="band band--featured">
+            <img class="bandImg" src="Resources/Bandlogos/Folie2.PNG" alt="FUNKgeræt">
+            <div class="bandBody">
+              <h3 class="bandName">FUNKgeræt</h3>
+              <p class="bandText">
+                Instrumentaler Funk/Soul mit eigenen Kompositionen, tightem Groove und viel Live-Energie.
+              </p>
+              <div class="bandLinks">
+                <a class="iconBtn" href="https://www.funkgeraet.info/" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+                <a class="iconBtn" href="https://www.instagram.com/funk_geraet/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie3.PNG" alt="Pentaphone Project">
+            <div class="bandBody">
+              <h3 class="bandName">Pentaphone Project</h3>
+              <p class="bandText">
+                Saxophon-Ensemble: Jazz, Latin und Swing – Fokus auf Klangfarben, Balance und Groove.
+              </p>
+              <div class="bandLinks">
+                <a class="iconBtn" href="https://magdalena-busler.com/pentaphone-project/" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+                <a class="iconBtn" href="https://www.instagram.com/explore/search/keyword/?q=%23pentaphoneproject" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie4.PNG" alt="Groove Legend Orchestra">
+            <div class="bandBody">
+              <h3 class="bandName">Groove Legend Orchestra</h3>
+              <p class="bandText">
+                Bigband aus Nürnberg – klassischer Bigband-Sound mit sattem Bläsersatz und Drive.
+              </p>
+              <div class="bandLinks">
+                <a class="iconBtn" href="https://groovelegendorchestra.de/" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+                <a class="iconBtn" href="https://www.facebook.com/Groove-Legend-Orchestra-100063624780034/" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+              </div>
+            </div>
+          </article>
+
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie5.PNG" alt="Kalle Quartett">
+            <div class="bandBody">
+              <h3 class="bandName">Kalle Quartett</h3>
+              <p class="bandText">
+                Modernes Jazzquartett - klare Melodien, Interaktion, zeitgemäßer Quartett-Sound.
+              </p>
+              <div class="bandLinks"></div>
+            </div>
+          </article>
+
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie7.PNG" alt="Duo Hülsmann Dupont">
+            <div class="bandBody">
+              <h3 class="bandName">Duo Hülsmann Dupont</h3>
+              <p class="bandText">
+                Leichtes Jazz-Duo - für jeden Anlass die passende Musik
+              </p>
+              <div class="bandLinks"></div>
+            </div>
+          </article>
+
+          <article class="band">
+            <img class="bandImg" src="Resources/Bandlogos/Folie6.PNG" alt="Jazzify">
+            <div class="bandBody">
+              <h3 class="bandName">Jazzify</h3>
+              <p class="bandText">
+                Pop-Songs als Jazz: frische Arrangements, Reharmonisationen und Spielfreude.
+              </p>
+              <div class="bandLinks">
+                <a class="iconBtn" href="https://www.finnspaude.com/jazzify" target="_blank" rel="noopener" aria-label="Website"><i class="fa-solid fa-globe"></i></a>
+                <a class="iconBtn" href="https://www.instagram.com/jazzify_project/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a class="iconBtn" href="https://www.youtube.com/@jazzify_project" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+ 
+    <section class="section" id="sonstiges">
+  <div class="sectionInner">
+    <header class="sectionHead">
+      <h2 class="sectionTitle">Sonstiges</h2>
+      <p class="sectionSub"></p>
+    </header>
+
+    <div class="articles">
+
+      <!-- ARTIKEL: Musikrat -->
+      <article class="aCard">
+        <a class="aImgLink"
+           href="https://www.musikrat.de/media/magazin/einblicke-erlebnisse/two-nations-under-one-groove"
+           target="_blank" rel="noopener" aria-label="Artikel öffnen: Two Nations Under One Groove">
+          <!-- Bild: hier deine lokale Datei eintragen -->
+          <img class="aImg" src="Resources/Bandlogos/Folie8.PNG" alt="Two Nations Under One Groove – Musikrat">
+        </a>
+
+        <div class="aBody">
+          <div class="aMeta">
+            <span class="aSource">Musikrat</span>
+            <a class="aLink"
+               href="https://www.musikrat.de/media/magazin/einblicke-erlebnisse/two-nations-under-one-groove"
+               target="_blank" rel="noopener">
+              Artikel öffnen <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            </a>
+          </div>
+
+          <h3 class="aTitle">Two Nations Under One Groove</h3>
+
+          <div class="aText aClamp" id="a-musikrat">
+            <p>
+              „Der Jazz ist eine Lingua franca. Dass sich in ihr Musiker aus den verschiedensten Ländern und Kulturen verständigen können, macht gerade seine Stärke aus.“
+ 
+Dass dieses Zitat von Manfred Papst noch immer aktuell ist, haben das niederländische Nationaal Jeugd Jazz Orkest und das deutsche Bundesjazzorchester bei ihrer Kooperation im September selbst erlebt. Unter dem Motto „Two Nations Under One Groove“ trafen sich beide Orchester unter dem Dach der Landesmusikakademie NRW in Heek um eine Woche lang zu proben, sich auszutauschen und internationale Freundschaften zu schließen. Dieser Austausch hat eine lange Tradition, unterstützt durch den Deutschen Musikrat. 
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <!-- ARTIKEL: Woodstock (Platzhalter) -->
+      <article class="aCard">
+        <div class="aImgLink" aria-label="Woodstock">
+          <!-- Bild: hier deine lokale Datei eintragen -->
+          <img class="aImg" src="Resources/Bandlogos/Folie9.PNG" alt="Woodstock">
+        </div>
+
+        <div class="aBody">
+          <div class="aMeta">
+            <span class="aSource">Story</span>
+          </div>
+
+          <h3 class="aTitle">Woodstock</h3>
+
+          <div class="aText aClamp" id="a-woodstock">
+            <p>Hallo ich war bei Woodstock. War cool</p>
+          </div>
+
+          <div class="aActions">
+            <button class="aBtn" type="button" data-more="#a-woodstock">Mehr anzeigen</button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="sectionInner">
+        <header class="sectionHead">
+          <h2 class="sectionTitle">Contact</h2>
+          <p class="sectionSub"></p>
+        </header>
+
+        <div class="contact">
+          <p class="contactLine">
+            <i class="fa-solid fa-envelope"></i>
+            <a class="link" href="mailto:info@estelledupont.de">info@estelledupont.de</a>
+          </p>
+          <p class="contactLine">
+            <i class="fa-solid fa-phone"></i>
+            <a class="link" href="tel:+491738862866">+49 173 8862866</a>
+          </p>
+
+          <div class="contactSocial">
+            <a class="iconBtn" href="https://www.instagram.com/estelle_dupont_/" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a class="iconBtn" href="https://www.youtube.com/@estelledupontsaxophone" target="_blank" rel="noopener" aria-label="YouTube">
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+            <a class="iconBtn" href="https://www.facebook.com/estelle.dupont.5095" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTBAR (eingebaut) ===== -->
+  <footer>
+    <div class="FootBar">
+      <table class="FooterTable" width="100%">
+        <tr>
+          <th width="10%"></th>
+          <th width="20%">
+            <img class="FooterLogo" src="Resources/NegLogoNoBG.png" alt="Estelle Dupont Logo">
+          </th>
+          <th width="20%">
+            <div class="FooterText">Estelle Dupont<br><br>68766 Hockenheim</div>
+          </th>
+          <th width="20%">
+            <div class="FooterInternalLinksDiv">
+              <a class="FooterInternalLink" href="index.html#top">Home</a><br>
+              <a class="FooterInternalLink" href="index.html#about">About</a><br>
+              <a class="FooterInternalLink" href="index.html#media">Media</a><br>
+              <a class="FooterInternalLink" href="index.html#bands">Bands</a><br>
+              <a class="FooterInternalLink" href="index.html#contact">Kontakt</a><br>
+              <a class="FooterInternalLink" href="Impressum.html">Impressum</a><br>
+              <a class="FooterInternalLink" href="Datenschutz.html">Datenschutz</a><br>
+            </div>
+          </th>
+          <th width="10%"></th>
+        </tr>
+        <tr>
+          <th width="10%"></th>
+          <th width="80%" colspan="3">
+            <div class="CopyrightNoticeFooter">
+              <p>Copyright &copy;&nbsp;</p>
+              <p id="VARCurYear"></p>
+              <p>&nbsp;- Estelle Dupont</p>
+            </div>
+            <div class="CopyrightNoticeFooter" style="display:block;">
+              <p>This Website is powered by <a style="color:white;" href="https://lipamusicservices.com/" target="_blank" rel="noopener">LiPa Music Services</a></p>
+            </div>
+          </th>
+          <th width="10%"></th>
+        </tr>
+      </table>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS (ALLES IM BODY, NICHT NACH </html>) ===== -->
+  <script>
+    // Jahre
+    const y1 = document.getElementById("VARCurYear");
+    if (y1) y1.textContent = new Date().getFullYear();
+
+    // ===== MenuBar: Mobile Toggle =====
+    const menuBar = document.getElementById("menuBar");
+    const menuToggle = document.querySelector(".MenuToggle");
+    const menuLinks = document.querySelector(".MenuLinks");
+
+    function setMenuOpen(open){
+      if(!menuBar || !menuToggle || !menuLinks) return;
+      menuBar.classList.toggle("is-open", open);
+      menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    if (menuToggle && menuBar) {
+      menuToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        setMenuOpen(!menuBar.classList.contains("is-open"));
+      });
+
+      // Klick außerhalb schließt
+      document.addEventListener("click", (e) => {
+        if (!menuBar.classList.contains("is-open")) return;
+        if (!menuBar.contains(e.target)) setMenuOpen(false);
+      });
+
+      // Link-Klick schließt
+      document.querySelectorAll(".MenuLinks a").forEach(a=>{
+        a.addEventListener("click", ()=> setMenuOpen(false));
+      });
+    }
+
+    // ===== Live-Events laden =====
+    const LIVE_PROXY_URL = "https://script.google.com/macros/s/AKfycbxzBwhPKQ7g346kdRqcmu15PiZSAxxQqck9aIokGXOyEHuQCFYV7gP1zw1THC08bZ46Fw/exec";
+
+    const liveListEl = document.getElementById("liveList");
+    const liveStatusEl = document.getElementById("liveStatus");
+
+    const liveToggleBtn = document.getElementById("liveToggleBtn");
+    let liveExpanded = false;
+    const LIVE_VISIBLE_COUNT = 5;
+
+    const esc = (s) => String(s ?? "").replace(/[&<>"']/g, m => ({
+      "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+    }[m]));
+
+    const fmtDate = (iso) => {
+      const d = new Date(iso);
+      if (Number.isNaN(d.getTime())) return iso;
+      return d.toLocaleDateString("de-DE", { year:"numeric", month:"2-digit", day:"2-digit" });
+    };
+
+    async function loadLive() {
+      try {
+        if (liveStatusEl) liveStatusEl.textContent = "Loading upcoming shows…";
+
+        const artists = ["Estelle Dupont"];
+        const qs = artists.map(a => "artist=" + encodeURIComponent(a)).join("&");
+        const url = LIVE_PROXY_URL + (LIVE_PROXY_URL.includes("?") ? "&" : "?") + qs;
+
+        const res = await fetch(url, { headers: { "Accept": "application/json" } });
+        if (!res.ok) throw new Error("Proxy error " + res.status);
+
+        const data = await res.json();
+        const events = Array.isArray(data.events) ? data.events : [];
+
+        if (!events.length) {
+          liveListEl.innerHTML = `<div class="itemText">Aktuell sind keine zukünftigen Termine gelistet.</div>`;
+          return;
+        }
+
+        const renderEvents = () => {
+  const visible = liveExpanded ? events : events.slice(0, LIVE_VISIBLE_COUNT);
+
+  liveListEl.innerHTML = visible.map(ev => {
+    const dateLabel = fmtDate(ev.datetime);
+
+    const venueStrong = ev.venueName
+      ? `<strong>${esc(ev.venueName)}</strong>`
+      : `<strong>${esc(ev.artist)}</strong>`;
+
+    const ticket = ev.ticketUrl
+      ? `<a class="link" href="${esc(ev.ticketUrl)}" target="_blank" rel="noopener"><i class="fa-solid fa-ticket"></i> Tickets</a>`
+      : `<span class="itemText" style="opacity:.8">Details folgen</span>`;
+
+    return `
+      <div class="liveRow">
+        <div class="liveLeft">
+          <div class="liveDate">${esc(dateLabel)}</div>
+          <div class="livePlace">${venueStrong}</div>
+          <div class="liveProject">${esc(ev.artist)}</div>
+        </div>
+        <div class="liveRight">${ticket}</div>
+      </div>
+    `;
+  }).join("");
+};
+
+renderEvents();
+
+/* Toggle Button nur wenn es mehr als 5 gibt */
+if (liveToggleBtn) {
+  if (events.length > LIVE_VISIBLE_COUNT) {
+    liveToggleBtn.hidden = false;
+    liveToggleBtn.textContent = liveExpanded ? "Weniger anzeigen" : "Weitere Termine anzeigen";
+
+    liveToggleBtn.onclick = () => {
+      liveExpanded = !liveExpanded;
+      liveToggleBtn.textContent = liveExpanded ? "Weniger anzeigen" : "Weitere Termine anzeigen";
+      renderEvents();
+    };
+  } else {
+    liveToggleBtn.hidden = true;
+  }
+}
+
+
+        const statusStillThere = document.getElementById("liveStatus");
+        if (statusStillThere) statusStillThere.remove();
+
+      } catch (err) {
+        console.error(err);
+        if (liveListEl) liveListEl.innerHTML = `<div class="itemText">Konnte Live-Termine gerade nicht laden.</div>`;
+      }
+    }
+
+    loadLive();
+  </script>
+
+</body>
+</html>

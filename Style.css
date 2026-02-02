@@ -1,0 +1,1219 @@
+/* ================================
+   Style.css (CLEAN / DARK)
+   One-page: Estelle Dupont
+   ================================ */
+
+/* ---------- TOKENS ---------- */
+:root{
+  /* Colors */
+  --brand: rgb(160, 140, 255);      /* Accent */
+  --bg: #0b1020;                    /* Page background */
+  --navBg: rgba(10, 16, 36, 0.88);  /* Nav background */
+  --panelBg: rgba(15, 22, 46, 0.92);
+
+  /* Text */
+  --text: rgba(255,255,255,0.88);
+  --muted: rgba(255,255,255,0.62);
+  --muted2: rgba(255,255,255,0.55);
+
+  /* UI */
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.55);
+  --radius: 18px;
+
+  /* Font */
+  --font: "Raleway", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+          Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+
+            /* Articles */
+  --cardBg: rgba(255,255,255,0.03);
+  --cardBg2: rgba(255,255,255,0.04);
+  --title: rgba(255,255,255,0.92);
+  --fadeTo: var(--bg);
+
+}
+
+*{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+
+body{
+  margin:0;
+  font-family: var(--font);
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* ================================
+   MENUBAR (Header)
+   ================================ */
+.MenuBar{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 10px 18px;
+  background: var(--navBg);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+}
+
+/* Logo: nur dieser Link als Box */
+.MenuBarLogoLink{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  border-radius: 14px;
+  overflow: hidden;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+}
+
+.MenuBarLogo{
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  padding: 6px;
+  filter: drop-shadow(0 2px 10px rgba(0,0,0,0.35));
+}
+
+/* Links rechts */
+.MenuLinks{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+  margin-left:auto;
+}
+
+/* Desktop: Pills */
+.MenuBarItem{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding: 10px 14px;
+  border-radius: 999px;
+
+  text-decoration: none;
+  color: rgba(255,255,255,0.92);
+
+  background: transparent;
+  border: 1px solid transparent;
+
+  transition: background .18s ease, border-color .18s ease, transform .18s ease, color .18s ease;
+}
+
+.MenuBarItem:hover{
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.MenuBarItem:focus,
+.MenuBarItem:focus-visible{
+  outline: none;
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(160,140,255,0.35);
+  box-shadow: 0 0 0 3px rgba(160,140,255,0.18);
+  color: #fff;
+}
+
+.MenuBarItem.is-active{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.18);
+}
+
+/* Burger Button: Desktop aus */
+.MenuToggle{
+  display:none;
+  margin-left:auto;
+
+  width: 46px;
+  height: 42px;
+  border-radius: 999px;
+
+  appearance:none;
+  -webkit-appearance:none;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 0;
+  cursor:pointer;
+
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap: 6px;
+}
+
+.MenuToggle span{
+  display:block;
+  width: 22px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.95);
+  transform-origin:center;
+  transition: transform .20s ease, opacity .20s ease;
+}
+
+/* open state -> X */
+.MenuBar.is-open .MenuToggle span:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.MenuBar.is-open .MenuToggle span:nth-child(2){
+  opacity: 0;
+}
+.MenuBar.is-open .MenuToggle span:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile dropdown */
+@media (max-width: 860px){
+  .MenuToggle{ display:inline-flex; }
+
+  .MenuLinks{
+    position:absolute;
+    left: 18px;
+    right: 18px;
+    top: calc(100% + 10px);
+
+    flex-direction:column;
+    gap: 6px;
+
+    background: var(--panelBg);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(0,0,0,0.55);
+    padding: 12px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    transform: translateY(-12px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    max-height: 0;
+    overflow: hidden;
+
+    transition:
+      transform .22s ease,
+      opacity .22s ease,
+      max-height .22s ease,
+      visibility 0s linear .22s;
+  }
+
+  .MenuBar.is-open .MenuLinks{
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    max-height: 420px;
+
+    transition:
+      transform .22s ease,
+      opacity .22s ease,
+      max-height .22s ease,
+      visibility 0s;
+  }
+
+  .MenuBarItem{
+    width: 100%;
+    justify-content:flex-start;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border-color: transparent;
+    transform: none;
+  }
+
+  .MenuBarItem:hover{
+    background: rgba(255,255,255,0.10);
+    transform:none;
+  }
+}
+
+/* ================================
+   HERO
+   ================================ */
+.hero{
+  position: relative;
+  height: clamp(560px, 82vh, 900px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.HeroImage{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.heroOverlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(to top, rgba(5,10,25,0.90) 0%, rgba(5,10,25,0.35) 52%, rgba(5,10,25,0.15) 100%),
+    radial-gradient(1200px 600px at 15% 75%, rgba(160,140,255,0.40), rgba(160,140,255,0) 60%);
+}
+
+.heroContent{
+  position: relative;
+  max-width: 1200px;
+  height:100%;
+  margin: 0 auto;
+  padding: 0 18px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  gap: 12px;
+
+  padding-bottom: clamp(34px, 6vh, 64px);
+}
+
+.heroKicker{
+  margin:0;
+  color: rgba(255,255,255,0.78);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-size: 0.86rem;
+  font-weight: 320;
+}
+
+.heroTitle{
+  margin:0;
+  color: #fff;
+  font-weight: 200;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  line-height: 1.02;
+  font-size: clamp(2.6rem, 5.4vw, 4.2rem);
+}
+
+.heroLead{
+  margin:0;
+  max-width: 760px;
+  color: rgba(255,255,255,0.86);
+  line-height: 1.7;
+  font-size: 1.02rem;
+  font-weight: 300;
+}
+
+.heroActions{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  text-decoration:none;
+  font-weight: 450;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(255,255,255,0.20);
+  transition: transform .15s ease, background .15s ease, color .15s ease, border-color .15s ease;
+}
+
+.btnPrimary{
+  background: #fff;
+  color: #0b1020;
+  border-color: rgba(255,255,255,0.40);
+}
+.btnPrimary:hover{ transform: translateY(-1px); }
+
+.btnGhost{
+  background: rgba(255,255,255,0.10);
+  color: #fff;
+}
+.btnGhost:hover{
+  background: rgba(255,255,255,0.14);
+  transform: translateY(-1px);
+}
+
+.heroSocial{
+  display:flex;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.iconBtn{
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  text-decoration:none;
+
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.92);
+  color: #1b1b2a;
+  transition: transform .15s ease, background .15s ease, color .15s ease;
+}
+.iconBtn:hover{
+  transform: translateY(-1px);
+  background: var(--brand);
+  color: #0b1020;
+}
+
+.iconBtn--light{
+  background: rgba(255,255,255,0.14);
+  border-color: rgba(255,255,255,0.22);
+  color: #fff;
+}
+.iconBtn--light:hover{
+  background: #fff;
+  color: #0b1020;
+}
+
+/* ================================
+   PAGE / SECTIONS
+   ================================ */
+.page{ background: var(--bg); }
+
+.section{
+  padding: 76px 0;
+}
+
+.section + .section{
+  border-top: 1px solid rgba(255,255,255,0.10);
+}
+
+.sectionInner{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 18px;
+}
+
+.sectionHead{ margin-bottom: 28px; }
+
+.sectionTitle{
+  margin: 0 0 8px 0;
+  color: #fff;
+  font-weight: 220;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+}
+
+.sectionSub{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 760px;
+  font-weight: 300;
+}
+
+/* ================================
+   LISTS / TEXT
+   ================================ */
+.list{
+  display:flex;
+  flex-direction:column;
+  gap: 18px;
+}
+
+.itemText{
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 860px;
+  font-weight: 300;
+}
+
+/* ================================
+   LIVE
+   ================================ */
+.liveRow{
+  display:flex;
+  gap: 18px;
+  justify-content:space-between;
+  align-items:flex-start;
+
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+.liveLeft{ display:flex; flex-direction:column; gap: 6px; }
+.liveDate{ color: rgba(255,255,255,0.92); font-weight: 520; letter-spacing: 0.04em; }
+.livePlace{ color: rgba(255,255,255,0.90); font-weight: 340; }
+.liveProject{ color: var(--muted); font-weight: 300; }
+.liveRight{ padding-top: 2px; }
+
+.link{
+  color: var(--brand);
+  text-decoration:none;
+  font-weight: 520;
+}
+.link:hover{ text-decoration: underline; text-underline-offset: 3px; }
+
+@media (max-width: 720px){
+  .liveRow{ flex-direction:column; }
+  .liveRight{ padding-top: 0; }
+}
+
+/* ================================
+   ABOUT
+   ================================ */
+.aboutGrid{
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 28px;
+  align-items:start;
+}
+
+.aboutText p{
+  margin: 0 0 12px 0;
+  color: var(--muted);
+  line-height: 1.8;
+  max-width: 860px;
+  font-weight: 300;
+}
+
+.aboutImageWrap{
+  display:flex;
+  justify-content:flex-end;
+}
+
+.aboutImage{
+  width: 100%;
+  max-width: 420px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  background: rgba(255,255,255,0.06);
+}
+
+@media (max-width: 980px){
+  .aboutGrid{ grid-template-columns: 1fr; }
+  .aboutImageWrap{ justify-content:flex-start; }
+  .aboutImage{ max-width: 520px; }
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tagPlain{
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.88);
+  font-weight: 450;
+  font-size: 0.9rem;
+}
+
+/* ================================
+   MEDIA
+   ================================ */
+.mediaGrid{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+.embed{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: #000;
+}
+
+@media (max-width: 900px){
+  .mediaGrid{ grid-template-columns: 1fr; }
+}
+
+/* ================================
+   BANDS
+   ================================ */
+.bands{
+  display:flex;
+  flex-direction:column;
+  gap: 26px;
+}
+
+.band{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+  align-items:start;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.10);
+}
+
+.bandImg{
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: var(--shadow);
+  background: rgba(255,255,255,0.06);
+}
+
+.bandBody{
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+}
+
+.bandName{
+  margin:0;
+  color: rgba(255,255,255,0.95);
+  font-weight: 220;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: clamp(1.35rem, 2.2vw, 1.9rem);
+}
+
+.bandText{
+  margin:0;
+  color: var(--muted);
+  line-height: 1.75;
+  max-width: 760px;
+  font-weight: 300;
+}
+
+.bandLinks{
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+
+@media (max-width: 980px){
+  .band{ grid-template-columns: 1fr; }
+}
+
+/* ================================
+   CONTACT
+   ================================ */
+.contact{
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.contactLine{
+  margin: 0;
+  color: var(--muted);
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  font-weight: 300;
+}
+
+.contactSocial{
+  margin-top: 10px;
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+
+/* ================================
+   FOOTER (modern + plain links)
+   ================================ */
+footer{ margin-top: 40px; }
+
+.FootBar{
+  background: rgba(10,16,36,0.92);
+  border-top: 1px solid rgba(255,255,255,0.10);
+  box-shadow: 0 -18px 45px rgba(0,0,0,0.35);
+  padding: 34px 18px 22px;
+}
+
+.FooterTable{
+  max-width: 1200px;
+  margin: 0 auto;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.FooterTable th{
+  padding: 10px 14px;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 300;
+}
+
+.FooterLogo{
+  height: 56px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 12px rgba(0,0,0,0.55));
+  opacity: 0.95;
+}
+
+.FooterText{
+  color: rgba(255,255,255,0.80);
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.FooterInternalLinksDiv{
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+/* plain footer links (keine Pills) */
+.FooterInternalLink,
+.FooterInternalLink:visited{
+  display: inline;
+  width: auto;
+
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+
+  color: rgba(255,255,255,0.78);
+  text-decoration: none;
+  font-weight: 350;
+
+  transition: color .18s ease, text-decoration-color .18s ease;
+}
+
+.FooterInternalLink:hover{
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+.FooterInternalLink:focus,
+.FooterInternalLink:focus-visible{
+  outline: none;
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.CopyrightNoticeFooter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.10);
+
+  color: rgba(255,255,255,0.62);
+  font-size: 0.92rem;
+  font-weight: 300;
+  text-align: center;
+}
+
+.CopyrightNoticeFooter p{ margin: 0; }
+
+.CopyrightNoticeFooter a,
+.CopyrightNoticeFooter a:visited{
+  color: rgba(255,255,255,0.86);
+  text-decoration: none;
+  font-weight: 520;
+}
+
+.CopyrightNoticeFooter a:hover{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.CopyrightNoticeFooter + .CopyrightNoticeFooter{
+  border-top: 0;
+  padding-top: 8px;
+  margin-top: 6px;
+  color: rgba(255,255,255,0.55);
+}
+
+/* Mobile footer: table stack */
+@media (max-width: 860px){
+  .FootBar{ padding: 26px 16px 18px; }
+
+  .FooterTable,
+  .FooterTable tbody,
+  .FooterTable tr,
+  .FooterTable th{
+    display: block;
+    width: 100% !important;
+  }
+
+  .FooterTable th[width="10%"]{ display: none; }
+
+  .FooterTable tr{
+    display: grid;
+    gap: 14px;
+  }
+
+  .FooterLogo{
+    height: 52px;
+    margin-bottom: 6px;
+  }
+
+  .FooterText{ text-align: center; }
+  .FooterInternalLinksDiv{ align-items: center; }
+}
+
+.liveToggleBtn{
+  margin-top: 14px;
+  padding: 10px 16px;
+  border-radius: 999px;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: rgba(255,255,255,0.92);
+
+  font-weight: 450;
+  letter-spacing: 0.02em;
+
+  cursor: pointer;
+  user-select: none;
+
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  transition:
+    transform .16s ease,
+    background .18s ease,
+    border-color .18s ease,
+    box-shadow .18s ease,
+    color .18s ease;
+}
+
+.liveToggleBtn:hover{
+  background: rgba(255,255,255,0.12);
+  border-color: rgba(160,140,255,0.38);
+  box-shadow: 0 14px 34px rgba(0,0,0,0.42), 0 0 0 3px rgba(160,140,255,0.12);
+  transform: translateY(-1px);
+  color: #fff;
+}
+
+.liveToggleBtn:active{
+  transform: translateY(0px);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.35);
+}
+
+.liveToggleBtn:focus,
+.liveToggleBtn:focus-visible{
+  outline: none;
+  border-color: rgba(160,140,255,0.55);
+  box-shadow: 0 0 0 4px rgba(160,140,255,0.18), 0 14px 34px rgba(0,0,0,0.42);
+}
+
+/* =========================================
+   MENU: Mobile = DARK (wie jetzt)
+         Desktop = LIGHT (invertiert)
+   ========================================= */
+
+/* Desktop Light Mode */
+@media (min-width: 861px){
+
+  /* Bar hell + glossy */
+  .MenuBar{
+    background: rgba(255,255,255,0.86);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+    border-bottom: 1px solid rgba(10,16,36,0.10);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
+  /* Logo-Kachel hell */
+  .MenuBarLogoLink{
+    background: rgba(0,0,0,0.04);
+    border-color: rgba(10,16,36,0.14);
+  }
+
+  /* Pills: dunkel text auf hell */
+  .MenuBarItem{
+    color: rgba(10,16,36,0.86);
+    background: transparent;
+    border: 1px solid transparent;
+  }
+
+  .MenuBarItem:hover{
+    background: rgba(10,16,36,0.06);
+    border-color: rgba(10,16,36,0.12);
+    color: rgba(10,16,36,0.95);
+  }
+
+  .MenuBarItem:focus,
+  .MenuBarItem:focus-visible{
+    outline: none;
+    background: rgba(10,16,36,0.08);
+    border-color: rgba(160,140,255,0.55);
+    box-shadow: 0 0 0 3px rgba(160,140,255,0.18);
+    color: rgba(10,16,36,0.95);
+  }
+
+  
+}
+
+/* Mobile Dark Mode explizit festnageln (falls irgendwo was überschrieben wurde) */
+@media (max-width: 860px){
+
+  .MenuBar{
+    background: var(--navBg);
+    box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+    border-bottom: 0;
+  }
+
+  .MenuBarLogoLink{
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.16);
+  }
+
+  .MenuBarItem{
+    color: rgba(255,255,255,0.92);
+  }
+}
+
+/* =========================================
+   THEME SWITCH:
+   Mobile (<=860px)  = DARK (default)
+   Desktop (>=861px) = LIGHT (invertiert)
+   ========================================= */
+
+@media (min-width: 861px){
+
+  /* 1) Variablen auf Light drehen */
+  :root{
+    --bg: #f6f7fb;                         /* Page background */
+    --navBg: rgba(255,255,255,0.86);       /* Nav background */
+    --panelBg: rgba(255,255,255,0.92);
+
+    --text: rgba(10,16,36,0.88);
+    --muted: rgba(10,16,36,0.62);
+    --muted2: rgba(10,16,36,0.55);
+
+    --border: rgba(10,16,36,0.12);
+    --shadow: 0 18px 45px rgba(10,16,36,0.10);
+
+        /* Articles (Light) */
+    --cardBg: rgba(10,16,36,0.03);
+    --cardBg2: rgba(10,16,36,0.04);
+    --title: rgba(10,16,36,0.92);
+    --fadeTo: var(--bg);
+
+  }
+
+  /* 2) Body/Page wirklich hell */
+  body{
+    background: var(--bg);
+    color: var(--text);
+  }
+  .page{ background: var(--bg); }
+
+  /* 3) Sections / Trennlinien von "weiß" auf dark-border */
+  .section + .section{
+    border-top: 1px solid var(--border);
+  }
+
+  .item,
+  .liveRow,
+  .band{
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 4) Typo: überall wo hart #fff / rgba(255...) drin war -> dark */
+  .sectionTitle{
+    color: rgba(10,16,36,0.92);
+  }
+
+  .bandName{
+    color: rgba(10,16,36,0.92);
+  }
+
+  .liveDate{
+    color: rgba(10,16,36,0.92);
+  }
+
+  .livePlace{
+    color: rgba(10,16,36,0.86);
+  }
+
+  /* 5) Cards/Bilder: Border auf dark-border */
+  .aboutImage,
+  .embed,
+  .bandImg{
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  /* 6) Icon-Buttons (in Content): etwas heller/cleaner */
+  .iconBtn{
+    background: rgba(255,255,255,0.92);
+    border: 1px solid var(--border);
+    color: rgba(10,16,36,0.92);
+    box-shadow: 0 10px 26px rgba(10,16,36,0.10);
+  }
+  .iconBtn:hover{
+    background: var(--brand);
+    color: #0b1020;
+  }
+
+  /* 7) Links im Content */
+  .link{
+    color: rgb(120, 95, 255);
+  }
+
+  /* 8) Footer bleibt DARK (optional) — wenn du willst, dass der Footer auch hell wird,
+        sag kurz Bescheid, dann drehen wir den ebenfalls um. */
+}
+
+/* Mobile bleibt wie bisher dark, keine extra Regeln nötig */
+/* =========================================
+   LOGO SWITCH:
+   Desktop (Light) = LogoNoBG.png
+   Mobile (Dark)   = NegLogoNoBG.png
+   ========================================= */
+
+@media (min-width: 861px){
+  .MenuBarLogo{
+    content: url("Resources/LogoNoBG.png");
+  }
+}
+
+@media (max-width: 860px){
+  .MenuBarLogo{
+    content: url("Resources/NegLogoNoBG.png");
+  }
+}
+
+/* Desktop Light: "Mehr Events anzeigen" Text darf nicht weiß sein */
+@media (min-width: 861px){
+  .liveToggleBtn{
+    color: rgba(10,16,36,0.88) !important;
+    border-color: rgba(10,16,36,0.16) !important;
+    background: rgba(10,16,36,0.06) !important;
+    box-shadow: 0 10px 26px rgba(10,16,36,0.10) !important;
+  }
+
+  .liveToggleBtn:hover{
+    color: rgba(10,16,36,0.95) !important;
+    background: rgba(10,16,36,0.10) !important;
+    border-color: rgba(10,16,36,0.22) !important;
+  }
+
+  .liveToggleBtn:focus,
+  .liveToggleBtn:focus-visible{
+    outline: none;
+    color: rgba(10,16,36,0.95) !important;
+    border-color: rgba(160,140,255,0.55) !important;
+    box-shadow: 0 0 0 4px rgba(160,140,255,0.18), 0 14px 34px rgba(10,16,36,0.14) !important;
+  }
+}
+
+/* Brand (Logo + Text) */
+.MenuBrand{
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0; /* wichtig fürs Kürzen */
+}
+
+/* Textblock */
+.MenuBrandText{
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+  min-width: 0; /* wichtig fürs Kürzen */
+}
+
+.MenuBrandName{
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.92);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 36vw;  /* verhindert dass es die Links wegdrückt */
+}
+
+.MenuBrandSub{
+  font-size: 0.82rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.70);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 36vw;
+}
+
+/* Mobile: nur Name (oder nur 1 Zeile) */
+@media (max-width: 860px){
+  .MenuBrandName{ max-width: 52vw; }
+  .MenuBrandSub{ display: none; }
+}
+
+@media (min-width: 861px){
+  .MenuBrandName{ color: rgba(10,16,36,0.92); }
+  .MenuBrandSub{ color: rgba(10,16,36,0.62); }
+}
+
+/* ================================
+   SONSTIGES / ARTICLES (clean grid)
+   ================================ */
+
+/* ================================
+   SONSTIGES / ARTICLES (responsive theme-safe)
+   ================================ */
+
+.articles{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+@media (max-width: 980px){
+  .articles{ grid-template-columns: 1fr; }
+}
+
+.aCard{
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--cardBg);
+}
+
+.aImgLink{
+  display:block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow:hidden;
+  background: var(--cardBg2);
+  text-decoration: none; /* verhindert hässliches Link-Underline */
+  color: inherit;
+}
+
+.aImg{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+  transform: scale(1.01);
+}
+
+.aBody{
+  padding: 14px 16px 16px;
+}
+
+.aMeta{
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.aSource{
+  color: var(--muted);
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.aLink{
+  color: var(--brand);
+  text-decoration:none;
+  font-weight: 520;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+.aLink:hover{
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.aTitle{
+  margin: 0 0 8px 0;
+  color: var(--title);
+  font-weight: 300;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  font-size: 1.05rem;
+}
+
+.aText{
+  color: var(--muted);
+  line-height: 1.8;
+  font-weight: 300;
+}
+.aText p{ margin: 0; }
+
+/* Clamp mit 3 Punkten (statt Fade) */
+.aClamp{
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Open state: voll anzeigen */
+.aOpen{
+  display: block;
+  overflow: visible;
+}
+
+
+.aActions{
+  margin-top: 12px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+.aBtn{
+  appearance:none;
+  -webkit-appearance:none;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+  padding: 9px 14px;
+  border-radius: 999px;
+  cursor:pointer;
+  font-weight: 450;
+  letter-spacing: 0.02em;
+  transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.aBtn:hover{
+  background: rgba(160,140,255,0.10);
+  border-color: rgba(160,140,255,0.35);
+  transform: translateY(-1px);
+}
