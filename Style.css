@@ -1191,7 +1191,6 @@ footer{ margin-top: 40px; }
   overflow: visible;
 }
 
-
 .aActions{
   margin-top: 12px;
   display:flex;
@@ -1216,4 +1215,149 @@ footer{ margin-top: 40px; }
   background: rgba(160,140,255,0.10);
   border-color: rgba(160,140,255,0.35);
   transform: translateY(-1px);
+}
+
+/* ================================
+   ABOUT – Marquee FULL WIDTH (3x Höhe)
+   ================================ */
+
+/* ================================
+   ABOUT – Marquee FULL WIDTH (FINAL)
+   ================================ */
+
+/* Outer: Fullwidth + darf rauswachsen */
+.aboutMarqueeFull{
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-top: 26px;
+
+  position: relative;
+  overflow: visible;          /* <<< Hover darf raus */
+  z-index: 5;
+}
+
+/* Inner: Clip nur im Normalzustand */
+.aboutMarqueeClip{
+  position: relative;
+  overflow: hidden;           /* <<< Normal: sauberer Schnitt */
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: rgba(255,255,255,0.03);
+}
+
+/* Sobald Hover: Clip AUS */
+.aboutMarqueeFull:hover .aboutMarqueeClip{
+  overflow: visible;
+}
+
+/* Fade links / rechts via Overlays (clippen NICHT) */
+.aboutMarqueeClip::before,
+.aboutMarqueeClip::after{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width: 90px;
+  pointer-events:none;
+  z-index: 20;
+}
+
+.aboutMarqueeClip::before{
+  left:0;
+  background: linear-gradient(
+    90deg,
+    var(--bg) 0%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+.aboutMarqueeClip::after{
+  right:0;
+  background: linear-gradient(
+    270deg,
+    var(--bg) 0%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* Track bewegt sich */
+.aboutMarqueeTrack{
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: aboutMarqueeMove 80s linear infinite;
+}
+
+/* Hover stoppt Laufband */
+.aboutMarqueeFull:hover .aboutMarqueeTrack{
+  animation-play-state: paused;
+}
+
+/* Zwei identische Sets */
+.aboutMarqueeSet{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px;
+}
+
+/* Bilder – groß, hoverfähig */
+.aboutMarqueeSet img{
+  width: 288px;
+  height: 288px;
+  flex: 0 0 auto;
+
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+  display: block;
+
+  background: rgba(255,255,255,0.06);
+  box-shadow: 0 14px 38px rgba(0,0,0,0.20);
+
+  position: relative;
+  z-index: 1;
+  transform-origin: center center;
+  transition:
+    transform .35s ease,
+    box-shadow .35s ease;
+}
+
+/* Hover: 50% größer + über alles drüber */
+.aboutMarqueeSet img:hover{
+  transform: scale(1.5);
+  z-index: 100;
+  box-shadow: 0 26px 70px rgba(0,0,0,0.35);
+}
+
+/* Bewegung exakt um 1 Set */
+@keyframes aboutMarqueeMove{
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Mobile */
+@media (max-width: 720px){
+  .aboutMarqueeSet{
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .aboutMarqueeSet img{
+    width: 210px;
+    height: 210px;
+  }
+}
+
+/* Reduce Motion */
+@media (prefers-reduced-motion: reduce){
+  .aboutMarqueeTrack{
+    animation: none;
+  }
+}
+
+/* Falls übergeordnete Container clippen */
+#about,
+#about .sectionInner{
+  overflow: visible;
 }
