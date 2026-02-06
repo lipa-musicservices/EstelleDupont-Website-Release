@@ -1278,11 +1278,7 @@ footer{ margin-top: 40px; }
 
 .aboutMarqueeClip::after{
   right:0;
-  background: linear-gradient(
-    270deg,
-    var(--bg) 0%,
-    rgba(0,0,0,0) 100%
-  );
+  
 }
 
 /* Track bewegt sich */
@@ -1365,4 +1361,36 @@ footer{ margin-top: 40px; }
 #about,
 #about .sectionInner{
   overflow: visible;
+}
+
+/* ================================
+   ABOUT MARQUEE – Mobile Click Mode only
+   Desktop bleibt wie gehabt (Hover)
+   ================================ */
+
+@media (max-width: 720px){
+
+  /* Hover-Effekte auf Mobile neutralisieren (damit nix “klebt”) */
+  .aboutMarqueeFull:hover .aboutMarqueeTrack{
+    animation-play-state: running;
+  }
+
+  .aboutMarqueeSet img:hover{
+    transform: none;
+  }
+
+  /* Click-Mode: nur wenn JS die Klassen setzt */
+  .aboutMarqueeTrack.is-paused{
+    animation-play-state: paused;
+  }
+
+  .aboutMarqueeSet img{
+    cursor: pointer;
+  }
+
+  .aboutMarqueeSet img.is-active{
+    transform: scale(1.35);
+    z-index: 50;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.35);
+  }
 }
