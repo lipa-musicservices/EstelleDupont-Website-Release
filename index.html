@@ -595,25 +595,19 @@ if (liveToggleBtn) {
 
 <script>
 /* ================================
-   ABOUT MARQUEE – JSONP Feed
-   Desktop: Hover (wie bisher)
-   Mobile: Click expand 5s + pause
+   ABOUT MARQUEE – JSONP Feed + Mobile Click Zoom (pause 5s)
+   Desktop: NICHT anfassen! (Hover Pause + Hover Zoom bleiben rein in CSS)
+   Mobile: Click -> Bild groß, Band stoppt, nach 5s wieder klein + weiter
    ================================ */
 
 const MARQUEE_FEED_URL =
   "https://script.google.com/macros/s/AKfycbx-VxrV6LDzG22lr8d0jJRLGZYbVk9SXx7YvoiQmkeR5emFrGKrqx70hi8X8Lqx2SUO/exec";
 
-const MOBILE_MQ = window.matchMedia("(max-width: 720px)");
-const isMobile = () => MOBILE_MQ.matches;
-
-/* ---------- JSONP Loader ---------- */
+// -------- JSONP Loader (CORS-frei) --------
 function loadJSONP(url, cbName){
   return new Promise((resolve, reject) => {
     const script = document.createElement("script");
-    const timeout = setTimeout(() => {
-      cleanup();
-      reject(new Error("JSONP timeout"));
-    }, 12000);
+    const timeout = setTimeout(() => { cleanup(); reject(new Error("JSONP timeout")); }, 12000);
 
     function cleanup(){
       clearTimeout(timeout);
@@ -629,38 +623,68 @@ function loadJSONP(url, cbName){
   });
 }
 
-/* ---------- Mobile Click Logic ---------- */
+// -------- Mobile state (click zoom) --------
 let marqueeTimer = null;
 let activeImg = null;
 
+function isMobileMarquee(){
+  return window.matchMedia("(max-width: 720px)").matches;
+}
+
+function getMarqueeTrack(){
+  return document.getElementById("aboutMarqueeTrack");
+}
+
+/**
+ * WICHTIG:
+ * Desktop darf NICHT per inline beeinflusst werden, sonst kaputt.
+ * => inline styles NUR auf Mobile setzen, auf Desktop wieder entfernen.
+ */
+function setMobileAnimState(state){ // "paused" | "running"
+  const track = getMarqueeTrack();
+  if(!track) return;
+
+  if(!isMobileMarquee()){
+    // Desktop: INLINE WEG, CSS regelt alles
+    track.style.animationPlayState = "";
+    track.style.webkitAnimationPlayState = "";
+    return;
+  }
+
+  // Mobile: inline darf
+  track.style.animationPlayState = state;
+  track.style.webkitAnimationPlayState = state;
+}
+
 function clearActiveMarquee(){
-  if (marqueeTimer) { clearTimeout(marqueeTimer); marqueeTimer = null; }
-  if (activeImg) { activeImg.classList.remove("is-active"); activeImg = null; }
-  const track = document.getElementById("aboutMarqueeTrack");
-  if (track) track.classList.remove("is-paused");
+  if (marqueeTimer){ clearTimeout(marqueeTimer); marqueeTimer = null; }
+  if (activeImg){ activeImg.classList.remove("is-active"); activeImg = null; }
+
+  // nur Mobile wieder laufen lassen
+  setMobileAnimState("running");
 }
 
 function activateMarqueeImage(img){
-  const track = document.getElementById("aboutMarqueeTrack");
-  if(!track || !img) return;
+  if(!img) return;
 
-  // Switch: altes sofort klein
-  if (activeImg && activeImg !== img) activeImg.classList.remove("is-active");
-
-  if (marqueeTimer) clearTimeout(marqueeTimer);
+  // altes sofort klein
+  if(activeImg && activeImg !== img) activeImg.classList.remove("is-active");
+  if(marqueeTimer) clearTimeout(marqueeTimer);
 
   activeImg = img;
   img.classList.add("is-active");
-  track.classList.add("is-paused");
+
+  // NUR Mobile: Band anhalten
+  setMobileAnimState("paused");
 
   marqueeTimer = setTimeout(() => {
     clearActiveMarquee();
   }, 5000);
 }
 
-/* ---------- Build Marquee ---------- */
+// -------- Build Marquee from Feed --------
 async function buildAboutMarquee(){
-  const track = document.getElementById("aboutMarqueeTrack");
+  const track = getMarqueeTrack();
   if(!track) return;
 
   try{
@@ -687,9 +711,10 @@ async function buildAboutMarquee(){
         img.src = it.thumb || it.url;
         img.alt = hidden ? "" : (it.name || `Foto ${idx+1}`);
 
-        // Click nur auf Mobile + nur im sichtbaren Set
-        if(!hidden && isMobile()){
+        // Click-Zoom nur auf dem "sichtbaren" Set
+        if(!hidden){
           img.addEventListener("click", (e) => {
+            if(!isMobileMarquee()) return; // Desktop: nix!
             e.preventDefault();
             e.stopPropagation();
             activateMarqueeImage(img);
@@ -706,14 +731,11 @@ async function buildAboutMarquee(){
     track.appendChild(makeSet(imgs, false));
     track.appendChild(makeSet(imgs, true));
 
-    // Auf Mobile: Klick außerhalb -> sofort zurück & weiterlaufen
-    if (isMobile()){
-      document.addEventListener("click", (e) => {
-        if(!activeImg) return;
-        if(e.target === activeImg) return;
-        clearActiveMarquee();
-      }, { passive: true });
-    }
+    // Desktop: Inline-Overrides sicher entfernen
+    setMobileAnimState("running"); // entfernt inline auf Desktop automatisch
+
+    // Mobile: falls vorher aktiv -> reset
+    clearActiveMarquee();
 
   } catch(err){
     console.error("Marquee feed failed:", err);
@@ -721,7 +743,9 @@ async function buildAboutMarquee(){
   }
 }
 
-/* ---------- Side-Scroll killen (Wheel + Touch) ---------- */
+/* ================================
+   Side-Scroll killen (Wheel + Touch horizontal)
+   ================================ */
 function lockMarqueeSideScroll(){
   const clip = document.querySelector(".aboutMarqueeClip");
   if(!clip) return;
@@ -742,17 +766,29 @@ function lockMarqueeSideScroll(){
     if(!e.touches || !e.touches[0]) return;
     const dx = e.touches[0].clientX - startX;
     const dy = e.touches[0].clientY - startY;
+
     if (Math.abs(dx) > Math.abs(dy)) e.preventDefault();
   }, { passive: false });
 }
 
-// Go
+// Wenn man rotiert / resized: Desktop wieder CSS, Mobile state sauber
+window.addEventListener("resize", () => {
+  // Wenn Desktop: Inline weg
+  if(!isMobileMarquee()){
+    clearActiveMarquee();
+    setMobileAnimState("running"); // entfernt inline auf Desktop
+  } else {
+    // Mobile: wenn aktiv, weiter paused lassen, sonst running
+    if(activeImg) setMobileAnimState("paused");
+    else setMobileAnimState("running");
+  }
+});
+
+// GO
 buildAboutMarquee();
 lockMarqueeSideScroll();
-
-// Wenn du im Responsive-Mode zwischen Desktop/Mobile wechselst:
-// Seite neu laden ist am stabilsten. (Sonst müssten wir Handler live umhängen.)
 </script>
+
 
 </body>
 </html>

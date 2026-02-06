@@ -1394,3 +1394,18 @@ footer{ margin-top: 40px; }
     box-shadow: 0 26px 70px rgba(0,0,0,0.35);
   }
 }
+
+@media (max-width: 720px){
+  /* Hover auf Mobile egalisieren */
+  .aboutMarqueeFull:hover .aboutMarqueeTrack{ animation-play-state: running; }
+  .aboutMarqueeSet img:hover{ transform: none; }
+
+  /* Click-State */
+  .aboutMarqueeSet img{ cursor: pointer; }
+
+  .aboutMarqueeSet img.is-active{
+    transform: scale(1.35);
+    z-index: 50;
+    box-shadow: 0 26px 70px rgba(0,0,0,0.35);
+  }
+}
