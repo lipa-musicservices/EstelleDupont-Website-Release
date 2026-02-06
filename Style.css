@@ -1269,11 +1269,6 @@ footer{ margin-top: 40px; }
 
 .aboutMarqueeClip::before{
   left:0;
-  background: linear-gradient(
-    90deg,
-    var(--bg) 0%,
-    rgba(0,0,0,0) 100%
-  );
 }
 
 .aboutMarqueeClip::after{
