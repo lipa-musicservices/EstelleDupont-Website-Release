@@ -1223,10 +1223,6 @@ footer{ margin-top: 40px; }
 }
 
 /* ================================
-   ABOUT – Marquee FULL WIDTH (3x Höhe)
-   ================================ */
-
-/* ================================
    ABOUT – Marquee FULL WIDTH (FINAL)
    ================================ */
 
@@ -1403,4 +1399,51 @@ footer{ margin-top: 40px; }
     z-index: 50;
     box-shadow: 0 26px 70px rgba(0,0,0,0.35);
   }
+}
+
+#cookieBanner{
+  position: fixed;
+  inset: auto 0 0 0;
+  padding: 14px;
+  z-index: 99999;
+  display: grid;
+  place-items: center;
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+}
+.cb__card{
+  width: min(720px, 100%);
+  background: #fff;
+  color: #111;
+  border-radius: 18px;
+  padding: 18px 18px 14px;
+  box-shadow: 0 20px 60px rgba(0,0,0,.25);
+  border: 1px solid rgba(0,0,0,.10);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.cb__title{ font-weight: 800; font-size: 1.1rem; margin-bottom: 6px; }
+.cb__text{ opacity: .85; line-height: 1.4; margin-bottom: 14px; }
+.cb__buttons{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom: 10px; }
+.cb__btn{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,.18);
+  background: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+.cb__btn--primary{
+  background:#111;
+  color:#fff;
+  border-color:#111;
+}
+.cb__fineprint{
+  display:flex; gap:10px; align-items:center;
+  font-size:.9rem; opacity:.8;
+}
+.cb__fineprint a{ color: inherit; }
+.cb__link{
+  background:none; border:none; padding:0;
+  text-decoration: underline;
+  cursor:pointer; font: inherit; opacity:.9;
 }
